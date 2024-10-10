@@ -2,10 +2,12 @@ package edu.ifpr.receitafacil.model;
 
 import java.io.Serializable;
 import java.sql.Date;
+import java.util.List;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
-import jakarta.persistence.Table;
+import jakarta.persistence.FetchType;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Temporal;
 import jakarta.persistence.TemporalType;
 import lombok.AllArgsConstructor;
@@ -18,9 +20,8 @@ import lombok.Setter;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-@Table(name = "farmacia_tb")
 @Entity
-public class Farmacia  extends Usuario implements Serializable {
+public class Farmacia extends Usuario implements Serializable {
 
   @Column
   private String cnpj;
@@ -28,4 +29,7 @@ public class Farmacia  extends Usuario implements Serializable {
   @Temporal(TemporalType.TIMESTAMP)
   @Column
   private Date dataAcesso;
+
+  @OneToMany(fetch = FetchType.LAZY, mappedBy = "farmacia")
+  private List<DispensacaoMedicamento> dispensacoesMedicamento;
 }

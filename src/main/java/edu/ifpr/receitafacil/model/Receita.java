@@ -6,9 +6,11 @@ import java.util.List;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
@@ -32,14 +34,14 @@ public class Receita implements Serializable {
   @GeneratedValue(strategy = GenerationType.AUTO)
   private Integer id;
 
-  @OneToOne
+  @OneToOne(fetch = FetchType.LAZY, mappedBy = "receita")
   private Paciente paciente;
 
-  @OneToOne
+  @OneToOne(fetch = FetchType.LAZY, mappedBy = "receita")
   private Medico medico;
 
-  @OneToMany
-  private List<ItemReceita> medicamentos;
+  @OneToMany(fetch = FetchType.LAZY, mappedBy = "receita")
+  private List<Medicamento> medicamentos;
 
   @Temporal(TemporalType.TIMESTAMP)
   @Column
@@ -47,4 +49,7 @@ public class Receita implements Serializable {
 
   @Column
   private String assinaturaDigital;
+
+  @OneToOne(fetch = FetchType.LAZY, mappedBy = "receita")
+  private DispensacaoMedicamento dispensacaoMedicamento;
 }

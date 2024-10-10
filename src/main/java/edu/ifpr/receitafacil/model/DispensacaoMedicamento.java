@@ -4,9 +4,12 @@ import java.io.Serializable;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
 import jakarta.persistence.Temporal;
@@ -28,8 +31,8 @@ public class DispensacaoMedicamento implements Serializable {
   @GeneratedValue(strategy = GenerationType.AUTO)
   private Integer id;
 
-  @OneToOne
-  private Receita receita;
+  @OneToOne(fetch = FetchType.LAZY, mappedBy = "dispensacaoMedicamento")
+  private Receita receita;  
 
   @Temporal(TemporalType.TIMESTAMP)
   @Column
@@ -41,4 +44,7 @@ public class DispensacaoMedicamento implements Serializable {
   @Column
   private String farmaceuticoResponsavel;
   
+  @ManyToOne(fetch = FetchType.LAZY)
+  @JoinColumn(name = "farmacia_id")
+  private Farmacia farmacia;
 }
