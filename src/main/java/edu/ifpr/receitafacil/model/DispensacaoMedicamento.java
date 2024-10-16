@@ -31,10 +31,11 @@ public class DispensacaoMedicamento implements Serializable {
   @GeneratedValue(strategy = GenerationType.AUTO)
   private Integer id;
 
-  @OneToOne(fetch = FetchType.LAZY, mappedBy = "dispensacaoMedicamento")
+  @OneToOne(fetch = FetchType.LAZY)
+  @JoinColumn(name = "receita_id")
   private Receita receita;  
 
-  @Temporal(TemporalType.TIMESTAMP)
+  @Temporal(TemporalType.DATE)
   @Column
   private java.util.Date dataDispensacao;
 

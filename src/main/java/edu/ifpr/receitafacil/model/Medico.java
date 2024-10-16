@@ -17,6 +17,7 @@ import lombok.Setter;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
+@Table(name = "medico_tb")
 @Entity
 public class Medico extends Usuario implements Serializable {
 

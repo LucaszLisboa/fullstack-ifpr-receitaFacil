@@ -34,16 +34,18 @@ public class Receita implements Serializable {
   @GeneratedValue(strategy = GenerationType.AUTO)
   private Integer id;
 
-  @OneToOne(fetch = FetchType.LAZY, mappedBy = "receita")
+  @OneToOne(fetch = FetchType.LAZY)
+  @JoinColumn(name = "paciente_id") // Chave estrangeira para o paciente
   private Paciente paciente;
 
-  @OneToOne(fetch = FetchType.LAZY, mappedBy = "receita")
+  @OneToOne(fetch = FetchType.LAZY)
+  @JoinColumn(name = "medico_id") // Chave estrangeira para o médico
   private Medico medico;
 
   @OneToMany(fetch = FetchType.LAZY, mappedBy = "receita")
   private List<Medicamento> medicamentos;
 
-  @Temporal(TemporalType.TIMESTAMP)
+  @Temporal(TemporalType.DATE)
   @Column
   private Date dataEnvio;
 
