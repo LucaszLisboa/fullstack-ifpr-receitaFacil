@@ -11,6 +11,8 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
+import jakarta.persistence.Temporal;
+import jakarta.persistence.TemporalType;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -32,13 +34,14 @@ public class Paciente implements Serializable {
   private String nome;
 
   @Column
+  @Temporal(TemporalType.DATE)
   private java.util.Date dataNascimento;
 
   @Column
   private String cpf;
 
   @Column
-  private String PlanoSaude;
+  private String planoSaude;
 
   @OneToMany(fetch = FetchType.LAZY, mappedBy = "paciente")
   private List<Receita> receitas;
