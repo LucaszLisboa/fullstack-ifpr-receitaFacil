@@ -16,7 +16,6 @@ import org.springframework.web.bind.annotation.RestController;
 
 import edu.ifpr.receitafacil.model.Medico;
 import edu.ifpr.receitafacil.services.MedicoService;
-import jakarta.websocket.server.PathParam;
 
 @RestController
 @RequestMapping("/medico")

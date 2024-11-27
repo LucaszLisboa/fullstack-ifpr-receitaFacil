@@ -16,7 +16,7 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 
 @Configuration
 @EnableWebSecurity
-public class SecurityConfig {
+public class SecurityConfig{
     
     @Autowired
     SecurityFilter securityFilter;
@@ -24,8 +24,9 @@ public class SecurityConfig {
     private static final String[] AUTH_WHITELIST = {
         // Lista de endpoints que não precisam de autenticação
         "/auth/*",
-        "/swagger-ui/*",
-        "/paciente/listar"
+        "/swagger-ui/**",
+        "/paciente/listar",
+        "/v3/api-docs/**"
     };
 
     @Bean
