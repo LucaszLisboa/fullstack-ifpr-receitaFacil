@@ -4,10 +4,12 @@ import { useEffect, useState } from 'react'
 function App() {
 
   useEffect(() => {
-    axios.get("localhost:8080/medico/listar").then((response) => {
+    axios.get("http://localhost:8080/medico/listar").then((response) => {
       console.log(response.data);
+    }).catch(error => {
+      console.error('Erro na requisição:', error);
     });
-  }, [])
+  }, []);
 
   return (
     <h1 className="text-3xl font-normal underline">
