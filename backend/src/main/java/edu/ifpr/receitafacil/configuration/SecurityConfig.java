@@ -31,7 +31,12 @@ public class SecurityConfig {
             "/auth/*",
             "/swagger-ui/**",
             "/paciente/listar",
-            "/v3/api-docs/**"
+            "/v3/api-docs/**",
+
+            // liberar rota de login e cadastro 
+            "/medico/listar"
+
+            // quando for um endpoit que precisa de autenticação, enviar o token no header da requisição 
     };
 
     @Bean
@@ -55,7 +60,7 @@ public class SecurityConfig {
     @Bean
     public CorsConfigurationSource corsConfigurationSource() {
         CorsConfiguration corsConfiguration = new CorsConfiguration();
-        corsConfiguration.setAllowedOrigins(Arrays.asList("http://localhost:5173"));
+        corsConfiguration.setAllowedOrigins(Arrays.asList("http://localhost:5173", "http://localhost:8080"));
         corsConfiguration.setAllowedMethods(Arrays.asList("GET", "POST", "PUT", "DELETE"));
         corsConfiguration.setAllowedHeaders(Arrays.asList("*"));
         corsConfiguration.setAllowCredentials(true); // Se necessário

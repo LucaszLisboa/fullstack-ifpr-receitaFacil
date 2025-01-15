@@ -1,3 +1,4 @@
+import { Button } from '@nextui-org/react';
 import axios from 'axios'
 import { useEffect, useState } from 'react'
 
@@ -12,9 +13,12 @@ function App() {
   }, []);
 
   return (
-    <h1 className="text-3xl font-normal underline">
-      Hello world!
-    </h1>
+    <>
+      <h1 className="text-3xl font-normal underline">
+        Hello world!
+      </h1>
+      <Button color="primary">Button</Button>
+    </>
   )
 }
 
