@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import edu.ifpr.receitafacil.model.Medico;
+import edu.ifpr.receitafacil.model.Receita;
 import edu.ifpr.receitafacil.services.MedicoService;
 
 @RestController
@@ -49,7 +50,7 @@ public class MedicoController {
         }
     }
 
-    @GetMapping("/listar")
+    @GetMapping
     public ResponseEntity<List<Medico>> listar(){
         try {
             List<Medico> medicos = medicoService.findAllMedicos();
@@ -59,7 +60,7 @@ public class MedicoController {
         }
     }
     
-    @PostMapping("/cadastrar")
+    @PostMapping
     public ResponseEntity<Object> cadastrar(@RequestBody Medico medico) {
         try {
             medicoService.cadastrarMedico(medico);
@@ -69,9 +70,10 @@ public class MedicoController {
         }
     }
 
-    @PutMapping("/salvar")
-    public ResponseEntity<Medico> salvar(@RequestBody Medico medico) {
+    @PutMapping("/{id}")
+    public ResponseEntity<Medico> salvar(@PathVariable int id, @RequestBody Medico medico) {
         try {
+            medico.setId(id);
             medicoService.atualizarMedico(medico);
             return new ResponseEntity<Medico>(medico, HttpStatus.OK);
         } catch (Exception e) {
@@ -88,5 +90,15 @@ public class MedicoController {
             return ResponseEntity.badRequest().body(e.getMessage());
         }
     }
+
+    // @PostMapping("/criarReceita")
+    // public ResponseEntity<Object> criarReceita(@RequestBody Receita receita) {
+    //     try {
+    //         medicoService.criarReceita(receita);
+    //         return ResponseEntity.ok(receita);
+    //     } catch (Exception e) {
+    //         return ResponseEntity.badRequest().body(e.getMessage());
+    //     }
+    // }
 
 }

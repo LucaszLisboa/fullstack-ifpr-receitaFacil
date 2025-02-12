@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -28,7 +29,7 @@ public class PacienteController {
         this.pacienteService = pacienteService;
     }
     
-    @GetMapping("/listar")
+    @GetMapping
     public ResponseEntity<List<Paciente>> listar() {
         try{
             List<Paciente> pacientes = pacienteService.findAllPacientes();
@@ -38,7 +39,7 @@ public class PacienteController {
         }
     }
 
-    @PostMapping("/cadastrar")
+    @PostMapping
     public ResponseEntity<Object> cadastrar(@RequestBody Paciente paciente) {
         try {
             pacienteService.cadastrarPaciente(paciente);
@@ -48,7 +49,7 @@ public class PacienteController {
         }
     }
 
-    @PutMapping("/salvar")
+    @PutMapping
     public ResponseEntity<Paciente> salvar(@RequestBody Paciente paciente) {
         try {
             pacienteService.atualizarPaciente(paciente);
@@ -58,10 +59,10 @@ public class PacienteController {
         }
     }
 
-    @DeleteMapping("/excluir")
-    public ResponseEntity<Void> excluir(@RequestParam int idPaciente) {
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Void> excluir(@PathVariable int id) {
         try {
-            pacienteService.excluirPaciente(idPaciente);
+            pacienteService.excluirPaciente(id);
             return ResponseEntity.ok().build();
         } catch (Exception e) {
             return ResponseEntity.badRequest().build();

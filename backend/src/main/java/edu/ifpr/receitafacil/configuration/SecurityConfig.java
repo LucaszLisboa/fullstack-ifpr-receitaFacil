@@ -30,13 +30,14 @@ public class SecurityConfig {
             // Lista de endpoints que não precisam de autenticação
             "/auth/*",
             "/swagger-ui/**",
-            "/paciente/listar",
             "/v3/api-docs/**",
+            "/medico/**",
+            "/paciente/**"
 
-            // liberar rota de login e cadastro 
-            "/medico/listar"
+            // liberar rota de login e cadastro
 
-            // quando for um endpoit que precisa de autenticação, enviar o token no header da requisição 
+            // quando for um endpoit que precisa de autenticação, enviar o token no header
+            // da requisição
     };
 
     @Bean
@@ -47,7 +48,6 @@ public class SecurityConfig {
                 .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .authorizeHttpRequests(requests -> {
                     requests.requestMatchers(AUTH_WHITELIST).permitAll();
-                    // requests.cors();
                     requests.requestMatchers(HttpMethod.POST, "/pessoa")
                             .hasRole("ADMIN")
                             .anyRequest()

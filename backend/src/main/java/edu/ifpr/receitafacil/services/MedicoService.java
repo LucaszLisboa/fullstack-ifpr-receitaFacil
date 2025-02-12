@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import edu.ifpr.receitafacil.model.Medico;
 import edu.ifpr.receitafacil.repository.MedicoRepository;
+import edu.ifpr.receitafacil.repository.ReceitaRepository;
 
 @Service
 public class MedicoService {
@@ -14,10 +15,15 @@ public class MedicoService {
     @Autowired
     MedicoRepository medicoRepository;
 
+    @Autowired
+    ReceitaRepository receitaRepository;
+
     public void cadastrarMedico(Medico medico) {
-        // Colocar validações aqui caso necessário
-        if(medico.getNome() == null || medico.getNome().isEmpty()) {
-            throw new IllegalArgumentException("Nome do médico não pode ser vazio");
+        if( 
+            medico.getNome() == null || medico.getNome().isEmpty() || 
+            medico.getCrm() == null || medico.getCrm().isEmpty()) {
+
+            throw new IllegalArgumentException("Nome e CRM são obrigatórios");
         }
         medicoRepository.save(medico);
     }
@@ -45,6 +51,16 @@ public class MedicoService {
     public Medico findByCrm(String crm) {
         return medicoRepository.findByCrm(crm);
     }
+
+    // public Receita criarReceita(Medico medico, Paciente paciente, List<Medicamento> medicamentos, String dataEnvio, String assinaturaDigital) {
+    //     Receita receita = new Receita();
+    //     receita.setMedico(medico);
+    //     receita.setPaciente(paciente);
+    //     receita.setMedicamentos(medicamentos);
+    //     receita.setDataEnvio(dataEnvio);
+    //     receita.setAssinaturaDigital(assinaturaDigital);
+    //     return receita;
+    // }
 
 
 }
